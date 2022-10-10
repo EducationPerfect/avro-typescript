@@ -7,11 +7,11 @@ SRC=./src
 for i in "$@"; do
   case $i in
     -n=*|--package-name=*)
-      PACKAGE_NAME="${i#*=}"
+      export PACKAGE_NAME="${i#*=}"
       shift
       ;;
     -v=*|--package-version=*)
-      PACKAGE_VERSION="${i#*=}"
+      export PACKAGE_VERSION="${i#*=}"
       shift
       ;;
     -p=*|--avro-dir-path=*)
@@ -23,11 +23,11 @@ for i in "$@"; do
       shift
       ;;
     -c=*|--company=*)
-      COMPANY="${i#*=}"
+      export COMPANY="${i#*=}"
       shift
       ;;
     -a=*|--authors=*)
-      AUTHORS="${i#*=}"
+      export AUTHORS="${i#*=}"
       shift
       ;;
     *)
@@ -46,5 +46,16 @@ echo "  - Authors         = $AUTHORS"
 echo "Clean up..."
 rm -rf ./src
 
-mkdir -p ${OUTPUT_PATH}
-avro-ts ${AVRO_FOLDER}/**/*.avsc --output-dir ${OUTPUT_PATH}
+mkdir -p ${OUTPUT_PATH}/src
+avro-ts ${AVRO_FOLDER}/**/*.avsc --output-dir ${OUTPUT_PATH}/src
+
+for f in ${OUTPUT_PATH}/src/*.avsc.ts; do mv "$f" "$(echo "$f" | sed s/\.avsc\./\./)"; done
+
+cat package.json.tpl | envsubst > ${OUTPUT_PATH}/package.json
+cp tsconfig.json ${OUTPUT_PATH}/tsconfig.json
+
+cd $OUTPUT_PATH
+npm install
+npx tsc
+npx npm-packlist-cli
+npx publish --dry-run
