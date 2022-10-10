@@ -1,0 +1,33 @@
+name: 'Avro NPM Package'
+description: 'Generates and packs TypeScript code as a NPM package out of Avro schema files'
+inputs:
+  package-name:
+    description: 'The name of the NPM package'
+    required: true
+  package-version:
+    description: 'The version of the NPM package'
+    required: true
+  avro-dir-path:
+    description: 'The path to the directory containing Avro files'
+    required: true
+  output-path:
+    description: 'The path to the put generated package at'
+    required: true
+    default: "./packages"
+  company-name:
+    description: 'The name of the company publishing the package'
+    required: false
+    default: "Education Perfect"
+  authors:
+    description: 'The authors of the package'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - --package-name=${{ inputs.package-name }}
+    - --package-version=${{ inputs.package-version }}
+    - --avro-dir-path=${{ inputs.avro-dir-path }}
+    - --output-path=${{ inputs.output-path }}
+    - --company=${{ inputs.company-name }}
+    - --authors=${{ inputs.authors }}
