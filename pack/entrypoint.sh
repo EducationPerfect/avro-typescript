@@ -58,4 +58,3 @@ cd $OUTPUT_PATH
 npm install
 npx tsc
 npx npm-packlist-cli
-npx publish --dry-run

@@ -1,0 +1,17 @@
+name: 'NPM Package Publisher'
+description: 'Publish an NPM package'
+inputs:
+  api-key:
+    description: 'The API Key of the source'
+    required: true
+  artifact-path:
+    description: 'The path to the generated package'
+    required: true
+    default: "./packages"
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - --api-key=${{ inputs.api-key }}
+    - --artifact-path=${{ inputs.artifact-path }}
