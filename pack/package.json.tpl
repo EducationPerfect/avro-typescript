@@ -3,7 +3,6 @@
   "version": "${PACKAGE_VERSION}",
   "author": "${COMPANY}",
   "contributors": ["${AUTHORS}"],
-  "private": true,
   "dependencies": {
     "typescript": "^4.8.4",
     "publish": "^0.6.0",
@@ -12,5 +11,8 @@
   "types": "dist/**/*.d.ts",
   "files": [
     "dist/**/*"
-  ]
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  }
 }
