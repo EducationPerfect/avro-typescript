@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-set -ex
+set -e
 
 SRC=./src
 
@@ -50,6 +50,8 @@ mkdir -p ${OUTPUT_PATH}/src
 avro-ts ${AVRO_FOLDER}/**/*.avsc --output-dir ${OUTPUT_PATH}/src
 
 for f in ${OUTPUT_PATH}/src/*.avsc.ts; do mv "$f" "$(echo "$f" | sed s/\.avsc\./\./)"; done
+
+ls
 
 cat package.json.tpl | envsubst > ${OUTPUT_PATH}/package.json
 cp tsconfig.json ${OUTPUT_PATH}/tsconfig.json
