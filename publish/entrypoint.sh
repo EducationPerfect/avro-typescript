@@ -6,7 +6,7 @@ SRC=./src
 for i in "$@"; do
   case $i in
     -k=*|--api-key=*)
-      API_KEY="${i#*=}"
+      export EP_NPM_TOKEN="${i#*=}"
       shift
       ;;
     -a=*|--artifact-path=*)
