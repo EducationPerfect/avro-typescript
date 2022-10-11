@@ -46,10 +46,12 @@ echo "  - Authors         = $AUTHORS"
 echo "Clean up..."
 rm -rf ./src
 
-mkdir -p ${OUTPUT_PATH}/src
-avro-ts ${AVRO_FOLDER}/**/*.avsc --output-dir ${OUTPUT_PATH}/src
+for d in ${AVRO_FOLDER}/*/; do
+  mkdir -p ${OUTPUT_PATH}/src/${d#$AVRO_FOLDER}
+  avro-ts ${AVRO_FOLDER}${d#$AVRO_FOLDER}*.avsc --output-dir ${OUTPUT_PATH}/src/${d#$AVRO_FOLDER}
+done
 
-for f in ${OUTPUT_PATH}/src/*.avsc.ts; do mv "$f" "$(echo "$f" | sed s/\.avsc\./\./)"; done
+for f in ${OUTPUT_PATH}/src/**/*.avsc.ts; do mv "$f" "$(echo "$f" | sed s/\.avsc\./\./)"; done
 
 cat /package.json.tpl | envsubst > ${OUTPUT_PATH}/package.json
 cp /tsconfig.json ${OUTPUT_PATH}/tsconfig.json

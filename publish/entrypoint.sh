@@ -22,7 +22,8 @@ echo "[Inputs]:"
 echo "ARTIFACT PATH = $ARTIFACT_PATH"
 echo "API KEY  = ****"
 
-cp /.npmrc ${ARTIFACT_PATH}/.npmrc
+cp /.npmrc ${ARTIFACT_PATH}/dist/.npmrc
+cp ${ARTIFACT_PATH}/package.json ${ARTIFACT_PATH}/dist/package.json
 
 echo "Publishing package..."
 cd $ARTIFACT_PATH
