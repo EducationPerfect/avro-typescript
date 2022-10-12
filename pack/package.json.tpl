@@ -10,7 +10,8 @@
   },
   "types": "**/*.d.ts",
   "files": [
-    "**/*"
+    "**/*.d.ts",
+    "**/*.js"
   ],
   "publishConfig": {
     "access": "restricted"
