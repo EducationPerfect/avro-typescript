@@ -59,4 +59,7 @@ cp /tsconfig.json ${OUTPUT_PATH}/tsconfig.json
 cd $OUTPUT_PATH
 npm install
 npx tsc
+
+cp package.json dist/package.json
+cd dist
 npx npm-packlist-cli

@@ -8,9 +8,9 @@
     "publish": "^0.6.0",
     "npm-packlist-cli": "^1.0.0"
   },
-  "types": "dist/**/*.d.ts",
+  "types": "**/*.d.ts",
   "files": [
-    "dist/**/*"
+    "**/*"
   ],
   "publishConfig": {
     "access": "restricted"
