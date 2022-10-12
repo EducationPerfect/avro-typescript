@@ -47,8 +47,13 @@ echo "Clean up..."
 rm -rf ./src
 
 for d in ${AVRO_FOLDER}/*/; do
+  count=$(ls -1 ${AVRO_FOLDER}${d#$AVRO_FOLDER}*.avsc 2>/dev/null | wc -l)
+
+  if [ $count != 0 ]
+  then
   mkdir -p ${OUTPUT_PATH}/src/${d#$AVRO_FOLDER}
   avro-ts ${AVRO_FOLDER}${d#$AVRO_FOLDER}*.avsc --output-dir ${OUTPUT_PATH}/src/${d#$AVRO_FOLDER}
+  fi
 done
 
 for f in ${OUTPUT_PATH}/src/**/*.avsc.ts; do mv "$f" "$(echo "$f" | sed s/\.avsc\./\./)"; done
