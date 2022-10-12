@@ -26,5 +26,5 @@ cp /.npmrc ${ARTIFACT_PATH}/dist/.npmrc
 cp ${ARTIFACT_PATH}/package.json ${ARTIFACT_PATH}/dist/package.json
 
 echo "Publishing package..."
-cd $ARTIFACT_PATH
+cd $ARTIFACT_PATH/dist
 npm publish
